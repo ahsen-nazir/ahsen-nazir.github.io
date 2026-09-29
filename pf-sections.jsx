@@ -58,7 +58,7 @@ function Hero() {
           <span className="corner bl"></span><span className="corner br"></span>
         </div>
         <div className="hero-bottom">
-          <p className="bio fadeword" style={{ animationDelay: '.7s' }} dangerouslySetInnerHTML={{ __html: PF.bio.replace('Computer Vision, NLP, and Generative AI', '<b>Computer Vision, NLP, and Generative AI</b>') }}></p>
+          <p className="bio fadeword" style={{ animationDelay: '.7s' }} dangerouslySetInnerHTML={{ __html: PF.bio.replace('production AI platforms', '<b>production AI platforms</b>') }}></p>
           <div className="hero-cta fadeword" style={{ animationDelay: '.8s' }}>
             <a href="#work" className="btn primary">View work <span className="ar">→</span></a>
             <a href={PF.resume} target="_blank" rel="noopener" className="btn ghost">Résumé <span className="ar">↗</span></a>
@@ -86,7 +86,12 @@ function Ticker() {
 }
 
 function LexForge() {
-  const lf = PF.lexforge;
+  const lf = PF.projects[0] || PF.lexforge;
+  const name = lf.name || lf.title;
+  const stack = lf.stack || lf.tags || [];
+  const highlights = lf.highlights || (lf.tags || []).map(t => t + " implementation");
+  const metrics = lf.metrics || [];
+  const shot = lf.shot || lf.img;
   return (
     <section className="lex" id="lexforge">
       <div className="wrap">
@@ -94,40 +99,44 @@ function LexForge() {
           <div className="lexglow"></div>
           <div className="lex-grid">
             <div className="lex-l">
-              <div className="lex-tag"><span className="live"></span>{lf.tag}</div>
-              <h3>{lf.name}<span className="sub">{lf.sub}</span></h3>
+              <div className="lex-tag"><span className="live"></span>{lf.tag || "Latest Release"}</div>
+              <h3>{name}<span className="sub">{lf.sub}</span></h3>
               <p className="desc">{lf.desc}</p>
               <div className="lex-hi">
-                {lf.highlights.map((h, i) => (
+                {highlights.map((h, i) => (
                   <div className="h" key={i}><i>▹</i>{h}</div>
                 ))}
               </div>
               <div className="lex-stack">
                 <span className="lex-stack-label">Built with</span>
                 <div className="lex-stack-chips">
-                  {lf.stack.map((s, i) => (
+                  {stack.map((s, i) => (
                     <span className="lex-chip" key={i}>{s}</span>
                   ))}
                 </div>
               </div>
-              <div className="lexcta">
-                <a href={lf.link} target="_blank" rel="noopener" className="btn primary">View case study <span className="ar">↗</span></a>
-              </div>
+              {lf.link ? (
+                <div className="lexcta">
+                  <a href={lf.link} target="_blank" rel="noopener" className="btn primary">View case study <span className="ar">↗</span></a>
+                </div>
+              ) : null}
             </div>
             <div className="lex-r">
               <div className="browser">
-                <div className="bar"><span className="d"></span><span className="d"></span><span className="d"></span><span className="url">{lf.urlLabel}</span></div>
-                <image-slot id="lexforge-shot" src={lf.shot} shape="rect" fit="cover" placeholder="Drop a LexForge screenshot"></image-slot>
+                <div className="bar"><span className="d"></span><span className="d"></span><span className="d"></span><span className="url">{lf.urlLabel || lf.link}</span></div>
+                <image-slot id="lexforge-shot" src={shot} shape="rect" fit="cover" placeholder={"Drop a " + name + " screenshot"}></image-slot>
               </div>
-              <div className="lex-metrics">
-                {lf.metrics.map((m, i) => (
+              {metrics.length ? (
+                <div className="lex-metrics">
+                  {metrics.map((m, i) => (
                   <div className="lm" key={i}>
-                    <div className="lm-head"><b>{m.v}</b><span className="lm-badge">RAGAS</span></div>
+                    <div className="lm-head"><b>{m.v}</b><span className="lm-badge">{m.badge || "RAGAS"}</span></div>
                     <span className="lm-name">{m.name}</span>
                     <span className="lm-delta"><i>▲</i>{m.d}</span>
                   </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              ) : null}
               <div className="scan"></div>
             </div>
           </div>
@@ -138,6 +147,28 @@ function LexForge() {
 }
 
 function Projects() {
+  const [expanded, setExpanded] = useState(false);
+  const gridRef = useRef(null);
+  const initialCount = 8;
+  const visibleProjects = expanded ? PF.projects : PF.projects.slice(0, initialCount);
+  const hiddenCount = Math.max(PF.projects.length - initialCount, 0);
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const cards = grid.querySelectorAll('.reveal:not(.in)');
+    const ob = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          ob.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+    cards.forEach(card => ob.observe(card));
+    return () => ob.disconnect();
+  }, [visibleProjects.length]);
+
   return (
     <section className="work" id="work">
       <div className="wrap">
@@ -148,9 +179,12 @@ function Projects() {
           </div>
           <p className="lead">Production AI across vision, language, and generative systems, built end-to-end from model to deployment.</p>
         </div>
-        <div className="proj-grid">
-          {PF.projects.map((p, i) => (
-            <a className={"pcard reveal" + (" d" + (i % 3 + 1))} href={p.link} target="_blank" rel="noopener" key={i}>
+        <div className="proj-grid" ref={gridRef}>
+          {visibleProjects.map((p, i) => {
+            const CardTag = p.link ? "a" : "article";
+            const cardProps = p.link ? { href: p.link, target: "_blank", rel: "noopener" } : {};
+            return (
+            <CardTag className={"pcard reveal" + (" d" + (i % 3 + 1))} {...cardProps} key={i}>
               <div className="thumb">
                 <img src={p.img} alt={p.title} loading="lazy" />
               </div>
@@ -161,11 +195,20 @@ function Projects() {
                   <p className="pdesc">{p.desc}</p>
                   <div className="tags">{p.tags.map((t, j) => <span key={j}>{t}</span>)}</div>
                 </div>
-                <span className="plink"><span className="plabel">View</span><span className="ar">↗</span></span>
+                {p.link ? <span className="plink"><span className="plabel">View</span><span className="ar">↗</span></span> : null}
               </div>
-            </a>
-          ))}
+            </CardTag>
+          );
+          })}
         </div>
+        {hiddenCount > 0 ? (
+          <div className="project-more reveal">
+            <button className="btn ghost project-toggle" type="button" onClick={() => setExpanded(v => !v)} aria-expanded={expanded}>
+              <span>{expanded ? "Show fewer projects" : "Show " + hiddenCount + " more project" + (hiddenCount === 1 ? "" : "s")}</span>
+              <span className="toggle-mark">{expanded ? "-" : "+"}</span>
+            </button>
+          </div>
+        ) : null}
       </div>
     </section>
   );
