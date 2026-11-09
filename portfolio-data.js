@@ -34,6 +34,50 @@ window.PF = {
   },
 
   projects: [
+{
+  title: "Dynamo Bench",
+  name: "Dynamo Bench",
+  tag: "Research · Open Source",
+  sub: "KV-cache-aware LLM inference benchmarking on NVIDIA Dynamo",
+  desc: "A controlled empirical study of request placement strategies in NVIDIA Dynamo, evaluating when KV-aware routing outperforms round-robin scheduling in distributed LLM inference. Benchmarks prefix-cache reuse, request-level routing decisions, and time-to-first-token (TTFT) under reproducible workloads using native Dynamo gRPC integration with vLLM's Rust frontend.",
+  img: "assets/dynamo-bench.png",
+  shot: "assets/dynamo-bench.png",
+  tags: [
+    "NVIDIA Dynamo",
+    "LLM Inference",
+    "KV Cache",
+    "Distributed Systems"
+  ],
+  highlights: [
+    "Implements and evaluates KV-aware request routing against round-robin placement in NVIDIA Dynamo",
+    "Integrates native Dynamo gRPC with vLLM's Rust frontend across multiple inference workers",
+    "Measures prefix-cache reuse, cache-hit behavior, routing decisions, TTFT, and end-to-end latency",
+    "Uses controlled, paired workloads with identical prompt families to isolate the impact of routing strategy",
+    "Captures request-level execution traces and vLLM Prometheus metrics for reproducible analysis",
+    "Investigates when cache locality improves inference performance and when round-robin routing falls short"
+  ],
+  metrics: [
+    { v: "2", name: "Routing strategies", d: "compared", badge: "Study" },
+    { v: "TTFT", name: "Latency", d: "measured", badge: "Metric" },
+    { v: "KV", name: "Cache locality", d: "analyzed", badge: "Routing" },
+  ],
+  stack: [
+    "NVIDIA Dynamo",
+    "vLLM",
+    "vLLM Rust Frontend",
+    "Python",
+    "gRPC",
+    "Prometheus",
+    "Grafana",
+    "Docker",
+    "Linux",
+    "Azure"
+  ],
+  link: "",
+  repo: "https://github.com/ahsen-nazir/dynamo-bench",
+  urlLabel: "github.com/ahsen-nazir/dynamo-bench",
+  wide: true,
+},
     {
       title: "AI Autopsy",
       name: "AI Autopsy",
