@@ -3,6 +3,7 @@ window.PF = {
   name: "Ahsen Nazir",
   brand: "AHSEN_NAZIR // AI.ENG",
   heroHeadline: {
+    eyebrow: "// designing intelligent systems",
     words: ["AI Systems", "building", "efficient"],
     accent: "AI infrastructure.",
   },

@@ -25,7 +25,7 @@ function Nav() {
 }
 
 function Hero() {
-  const { words, accent } = PF.heroHeadline;
+  const { eyebrow, words, accent } = PF.heroHeadline;
   return (
     <section className="hero" id="top">
       <div className="hero-bg">
@@ -37,7 +37,7 @@ function Hero() {
       </div>
       <div className="wrap hero-inner">
         <div className="hero-top">
-          <div className="eyebrow fadeword" style={{ animationDelay: '.05s' }}>// designing intelligent systems</div>
+          <div className="eyebrow fadeword" style={{ animationDelay: '.05s' }}>{eyebrow}</div>
           <h1>
             {words.map((w, i) => (
               <React.Fragment key={i}>
