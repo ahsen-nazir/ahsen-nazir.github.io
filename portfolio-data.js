@@ -3,9 +3,9 @@ window.PF = {
   name: "Ahsen Nazir",
   brand: "AHSEN_NAZIR // AI.ENG",
   heroHeadline: {
-    eyebrow: "// designing intelligent systems",
-    words: ["AI Systems", "building", "efficient"],
-    accent: "AI infrastructure.",
+    eyebrow: "// efficient AI development & deployment",
+    words: ["Engineering", "efficient", "AI"],
+    accent: "infrastructure.",
   },
   resume: "https://drive.google.com/file/d/1FdTTZCA5VbFh3Z3H3nPGXhBbMyBIVNP9/view?usp=sharing",
   bio: `AI Systems Engineer with 5+ years of experience building production AI systems across computer vision, NLP, and generative AI. Focused on distributed LLM inference, AI infrastructure, GPU orchestration, and performance engineering.`,
