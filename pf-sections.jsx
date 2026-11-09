@@ -25,7 +25,7 @@ function Nav() {
 }
 
 function Hero() {
-  const words = ["AI", "that", "ships", "to"];
+  const { words, accent } = PF.heroHeadline;
   return (
     <section className="hero" id="top">
       <div className="hero-bg">
@@ -44,7 +44,7 @@ function Hero() {
                 <span className="fadeword" style={{ animationDelay: (0.15 + i * 0.1) + 's' }}>{w}</span>{' '}
               </React.Fragment>
             ))}
-            <span className="fadeword t" style={{ animationDelay: '.55s' }}>prod.</span>
+            <span className="fadeword t" style={{ animationDelay: '.55s' }}>{accent}</span>
           </h1>
         </div>
         <div className="portrait fadeword" style={{ animationDelay: '.5s' }}>
