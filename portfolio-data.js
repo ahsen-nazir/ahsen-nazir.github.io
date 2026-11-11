@@ -46,9 +46,9 @@ window.PF = {
         { v: "100%", name: "Routing accuracy", d: "Observed cache-affinity decisions", },
       ],
       stack: ["NVIDIA Dynamo", "vLLM", "Python", "gRPC", "Prometheus", "Grafana", "Azure"],
-      link: "https://github.com/ahsen-nazir/dynamo-bench",
-      repo: "https://github.com/ahsen-nazir/dynamo-bench",
-      urlLabel: "github.com/ahsen-nazir/dynamo-bench",
+      link: "https://github.com/ahsennazir/dynamo-bench",
+      repo: "https://github.com/ahsennazir/dynamo-bench",
+      urlLabel: "github.com/ahsennazir/dynamo-bench",
       wide: true,
     },
     {
@@ -105,9 +105,9 @@ window.PF = {
     {
       title: "AvatarAI Live: Interactive Local AI Avatars",
       desc: "Select and converse with local AI avatars in real time. Built on Google AI Studio, ElevenLabs, a local LLM + ASR, TTS, and GAN-based lip-sync, with ~3-5s response on an RTX 4070 Ti.",
-      img: "https://github.com/acen20/avatarai-live-demo/blob/main/assets/cover_image.png?raw=true",
+      img: "https://github.com/ahsennazir/avatarai-live-demo/blob/main/assets/cover_image.png?raw=true",
       tags: ["Local LLM", "ASR/TTS", "LipSync GAN", "Realtime"],
-      link: "https://github.com/acen20/avatarai-live-demo",
+      link: "https://github.com/ahsennazir/avatarai-live-demo",
       wide: true,
     },
     {
@@ -115,7 +115,7 @@ window.PF = {
       desc: "Production pipeline that detects tables, nozzles, notes & views in engineering drawings with YOLOv8, then extracts text/tabular data via PaddleOCR + DONUT to clean JSON/CSV for CAD/BIM.",
       img: "assets/ga.png",
       tags: ["YOLOv8", "PaddleOCR", "DONUT"],
-      link: "https://github.com/acen20/ga-analysis",
+      link: "https://github.com/ahsennazir/ga-analysis",
     },
     {
       title: "Automated Social Media Posting",
